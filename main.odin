@@ -25,7 +25,7 @@ handle_command :: proc(cmd: string) {
 	case HELP:
 		help_message()
 	case INIT:
-		command_init(".")
+		command_init()
 	case PULL:
 		fmt.println("LETS PULL")
 	case PUSH:
@@ -40,17 +40,17 @@ help_message :: proc() {
 	fmt.println("Usage:\n\todot command\n")
 	fmt.println("Commands:\n\t")
 	fmt.printfln("\t%v\tview this help message", HELP)
-	fmt.printfln("\t%v\tgenerate .odot.manifest", INIT)
+	fmt.printfln("\t%v\tgenerate .odot.manifest in current directory", INIT)
 	fmt.printfln("\t%v\tpull configuration files from system into odot repository", PULL)
 	fmt.printfln("\t%v\tpush configuration files from odot repository into system", PUSH)
 }
 
-command_init :: proc(path: string) {
-	x := "pish posh apple sauce"
-	err := os.write_entire_file(".odot.manifest", x)
+command_init :: proc() {
+	err := os.write_entire_file("../testaroo/.odot.manifest", "asdf")
 	if err != nil {
-		fmt.println("no bueno")
+		fmt.println(err)
+	} else {
+		fmt.println("bueno")
 	}
-	fmt.println("bueno")
 }
 
