@@ -2,7 +2,6 @@ package main
 
 import "core:fmt"
 import "core:os"
-import "core:terminal"
 
 // Available Commands
 HELP: string : "help"
@@ -13,9 +12,26 @@ PUSH: string : "push"
 main :: proc() {
 	args := os.args[1:]
 
-	if len(args) == 0 {
+	switch len(args) {
+	case 0:
 		help_message()
-		return
+	case 1:
+		handle_command(args[0])
+	}
+}
+
+handle_command :: proc(cmd: string) {
+	switch cmd {
+	case HELP:
+		help_message()
+	case INIT:
+		command_init(".")
+	case PULL:
+		fmt.println("LETS PULL")
+	case PUSH:
+		fmt.println("LETS PUSH")
+	case:
+		fmt.println("Fallback if nothing is met")
 	}
 }
 
@@ -27,5 +43,14 @@ help_message :: proc() {
 	fmt.printfln("\t%v\tgenerate .odot.manifest", INIT)
 	fmt.printfln("\t%v\tpull configuration files from system into odot repository", PULL)
 	fmt.printfln("\t%v\tpush configuration files from odot repository into system", PUSH)
+}
+
+command_init :: proc(path: string) {
+	x := "pish posh apple sauce"
+	err := os.write_entire_file(".odot.manifest", x)
+	if err != nil {
+		fmt.println("no bueno")
+	}
+	fmt.println("bueno")
 }
 
