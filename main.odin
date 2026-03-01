@@ -20,11 +20,12 @@ main :: proc() {
 }
 
 help_message :: proc() {
-	fmt.println("USAGE\nodot <command>\n")
-	fmt.println("COMMANDS")
-	fmt.println(HELP + ": view this help message")
-	fmt.println(INIT + ": generate .odot.manifest")
-	fmt.println(PULL + ": pull configuration files from system into dotfiles repository")
-	fmt.println(PUSH + ": push configuration files from dotfiles repository into system")
+	fmt.println("odot is a dead simple cli application for managing dot files")
+	fmt.println("Usage:\n\todot command\n")
+	fmt.println("Commands:\n\t")
+	fmt.printfln("\t%v\tview this help message", HELP)
+	fmt.printfln("\t%v\tgenerate .odot.manifest", INIT)
+	fmt.printfln("\t%v\tpull configuration files from system into odot repository", PULL)
+	fmt.printfln("\t%v\tpush configuration files from odot repository into system", PUSH)
 }
 
