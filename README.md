@@ -1,3 +1,3 @@
 # odot
 
-A dead simple dotfile manager written in Odin
+a simple dotfile manager

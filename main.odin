@@ -3,15 +3,17 @@ package main
 import "core:fmt"
 import "core:os"
 
-// Available Commands
+// available commands
 HELP: string : "help"
 INIT: string : "init"
 PULL: string : "pull"
 PUSH: string : "push"
 
+// odot ini file path
+INI_FILE: string : ".odot.ini"
+
 main :: proc() {
 	args := os.args[1:]
-
 	switch len(args) {
 	case 0:
 		help_message()
@@ -36,7 +38,7 @@ handle_command :: proc(cmd: string) {
 }
 
 help_message :: proc() {
-	fmt.println("odot is a dead simple cli application for managing dot files")
+	fmt.println("odot is a simple cli application for managing dot files")
 	fmt.println("Usage:\n\todot command\n")
 	fmt.println("Commands:\n\t")
 	fmt.printfln("\t%v\tview this help message", HELP)
@@ -46,11 +48,11 @@ help_message :: proc() {
 }
 
 command_init :: proc() {
-	err := os.write_entire_file("../testaroo/.odot.manifest", "asdf")
+	err := os.write_entire_file(INI_FILE, "asdf")
 	if err != nil {
-		fmt.println(err)
+		fmt.eprintfln("failed to create '.odot.manifest' with error: %v", err)
 	} else {
-		fmt.println("bueno")
+		fmt.println("'.odot.manifest' successfully created in current directory")
 	}
 }
 
